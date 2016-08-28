@@ -1,47 +1,24 @@
 # worker loader for webpack
 
+## [fork from worker-loader](https://github.com/webpack/worker-loader)
+在该项目基础上增加了url模式,返回处理后的url.该url可以作为worker的构造参数.弥补了该loader只能创建DedicateWorker的不足.
+
 ## Usage
-
-[Documentation: Using loaders](http://webpack.github.io/docs/using-loaders.html)
-
-Import the worker file:
-
+npm install cpoopc-webworker
+0. url模式
 ``` javascript
-// main.js
-var MyWorker = require("worker!./file.js");
-
-var worker = new MyWorker();
-worker.postMessage({a: 1});
-worker.onmessage = function(event) {...};
-worker.addEventListener("message", function(event) {...});
+var workerUrl = require("worker?url!./workerFile.js");
+var worker = new Worker(workerUrl)
+var sharedWorker = new sharedWorker(workerUrl)
 ```
-
-You can also inline the worker as a blob with the `inline` parameter:
+0. 普通模式 (除了增加了url模式,其他都与原项目一致)
+``` javascript
+var MyWorker = require("worker!./file.js");
+var worker = new MyWorker();
+```
+0. inline模式
 ``` javascript
 var MyWorker = require("worker?inline!./file.js");
-```
-
-
-The worker file can import dependencies just like any other file:
-
-``` javascript
-// file.js
-var _ = require('lodash')
-
-var o = {foo: 'foo'}
-
-_.has(o, 'foo') // true
-```
-
-You can even use ES6 modules if you have the babel-loader configured:
-
-``` javascript
-// file.js
-import _ from 'lodash'
-
-let o = {foo: 'foo'}
-
-_.has(o, 'foo') // true
 ```
 
 ## License

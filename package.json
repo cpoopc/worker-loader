@@ -1,6 +1,6 @@
 {
   "name": "cpoopc-webworker-loader",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "webworker loader",
   "main": "index.js",
   "scripts": {
